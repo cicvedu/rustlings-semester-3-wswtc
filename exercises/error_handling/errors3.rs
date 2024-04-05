@@ -7,7 +7,7 @@
 // Execute `rustlings hint errors3` or use the `hint` watch subcommand for a
 // hint.
 
-// I AM NOT DONE
+
 
 use std::num::ParseIntError;
 
@@ -15,13 +15,20 @@ fn main() {
     let mut tokens = 100;
     let pretend_user_input = "8";
 
-    let cost = total_cost(pretend_user_input)?;
-
-    if cost > tokens {
-        println!("You can't afford that many!");
-    } else {
-        tokens -= cost;
-        println!("You now have {} tokens.", tokens);
+    // 使用 match 处理 total_cost 函数的返回结果
+    match total_cost(pretend_user_input) {
+        Ok(cost) => {
+            if cost > tokens {
+                println!("You can't afford that many!");
+            } else {
+                tokens -= cost;
+                println!("You now have {} tokens.", tokens);
+            }
+        }
+        Err(err) => {
+            // 处理错误情况
+            println!("Error: {}", err);
+        }
     }
 }
 
